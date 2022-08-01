@@ -1,5 +1,7 @@
 import React , {useState} from 'react';
 import './App.css';
+import ListStudent from './components/ListStudent';
+import {addStudent, getAllStudents} from './store';
 
 /*
 form 
@@ -36,23 +38,22 @@ function AddStudent(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("studnet add form submitted");
-    console.log("name: ", name,
-     ", mobileNumber:", mobileNumber,
-     ", course:", course,
-     "notes:", notes);
+
+     var student = {
+       name: name,
+       mobileNumber: mobileNumber,
+       course: course,
+       notes: notes
+     };
+
+     addStudent(student);
+
+
   };
   
   return (
     <form onSubmit = {handleSubmit}>
-
-      <div id="message_area">
-        Name: {name}<br/>
-        MobileNumber: {mobileNumber}<br/>
-        Course: {course} <br/>
-        Notes: {notes}<br/>
-      </div>
-      <hr/>
+      <h2>Add Student</h2>
       <label>
         Name:
         
@@ -117,12 +118,14 @@ function AddStudent(){
 }
   
 function App() {
+    // var students = getAllStudents();
     return ( 
 
       <div>
         <h1> Student management website </h1>
 
         <AddStudent/>
+        <ListStudent />
         
         {/* <ol>
           <li>add student</li> 
